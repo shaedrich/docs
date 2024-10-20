@@ -211,17 +211,15 @@ sail artisan queue:work
 <a name="executing-node-npm-commands"></a>
 ### Executing Node / NPM Commands
 
-Node commands may be executed using the `node` command while NPM commands may be executed using the `npm` command:
+Node commands may be executed using the `node` command while NPM commands may be executed using the `npm` command. If you wish, you may use Yarn instead of NPM:
 
-```shell
+```shell tab=npm
 sail node --version
 
 sail npm run dev
 ```
 
-If you wish, you may use Yarn instead of NPM:
-
-```shell
+```shell tab=yarn
 sail yarn
 ```
 

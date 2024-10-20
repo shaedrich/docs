@@ -853,17 +853,19 @@ A complete list of available scopes is available below:
 <a name="subscription-single-charges"></a>
 ### Subscription Single Charges
 
-Subscription single charges allow you to charge subscribers with a one-time charge on top of their subscriptions. You must provide one or multiple price ID's when invoking the `charge` method:
+Subscription single charges allow you to charge subscribers with a one-time charge on top of their subscriptions. You must provide one or multiple price ID's when invoking the `charge` method. The `charge` method will not actually charge the customer until the next billing interval of their subscription. If you would like to bill the customer immediately, you may use the `chargeAndInvoice` method instead:
 
-    // Charge a single price...
-    $response = $user->subscription()->charge('pri_123');
+```php tab=Charge at next billing interval
+// Charge a single price...
+$response = $user->subscription()->charge('pri_123');
 
-    // Charge multiple prices at once...
-    $response = $user->subscription()->charge(['pri_123', 'pri_456']);
+// Charge multiple prices at once...
+$response = $user->subscription()->charge(['pri_123', 'pri_456']);
+```
 
-The `charge` method will not actually charge the customer until the next billing interval of their subscription. If you would like to bill the customer immediately, you may use the `chargeAndInvoice` method instead:
-
-    $response = $user->subscription()->chargeAndInvoice('pri_123');
+```php tab=Charge immediately
+$response = $user->subscription()->chargeAndInvoice('pri_123');
+```
 
 <a name="updating-payment-information"></a>
 ### Updating Payment Information

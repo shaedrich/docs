@@ -670,17 +670,19 @@ You may use the `appendSlowly` method to append text slowly:
 <a name="dropdowns"></a>
 #### Dropdowns
 
-To select a value available on a `select` element, you may use the `select` method. Like the `type` method, the `select` method does not require a full CSS selector. When passing a value to the `select` method, you should pass the underlying option value instead of the display text:
+To select a value available on a `select` element, you may use the `select` method. Like the `type` method, the `select` method does not require a full CSS selector. When passing a value to the `select` method, you should pass the underlying option value instead of the display text. You may select a random option by omitting the second argument. By providing an array as the second argument to the `select` method, you can instruct the method to select multiple options:
 
-    $browser->select('size', 'Large');
+```php tab=Default
+$browser->select('size', 'Large');
+```
 
-You may select a random option by omitting the second argument:
+```php tab=Select random
+$browser->select('size');
+```
 
-    $browser->select('size');
-
-By providing an array as the second argument to the `select` method, you can instruct the method to select multiple options:
-
-    $browser->select('categories', ['Art', 'Music']);
+```php tab=Multiple options
+$browser->select('categories', ['Art', 'Music']);
+```
 
 <a name="checkboxes"></a>
 #### Checkboxes

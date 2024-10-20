@@ -366,35 +366,37 @@ When a user is viewing one of their orders, we don't want them to have to refres
         public $order;
     }
 
-The `ShouldBroadcast` interface requires our event to define a `broadcastOn` method. This method is responsible for returning the channels that the event should broadcast on. An empty stub of this method is already defined on generated event classes, so we only need to fill in its details. We only want the creator of the order to be able to view status updates, so we will broadcast the event on a private channel that is tied to the order:
+The `ShouldBroadcast` interface requires our event to define a `broadcastOn` method. This method is responsible for returning the channels that the event should broadcast on. An empty stub of this method is already defined on generated event classes, so we only need to fill in its details. We only want the creator of the order to be able to view status updates, so we will broadcast the event on a private channel that is tied to the order. If you wish the event to broadcast on multiple channels, you may return an `array` instead:
 
-    use Illuminate\Broadcasting\Channel;
-    use Illuminate\Broadcasting\PrivateChannel;
+```php tab=Single channel filename=app/Events/OrderShipmentStatusUpdated.php
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\PrivateChannel;
 
-    /**
-     * Get the channel the event should broadcast on.
-     */
-    public function broadcastOn(): Channel
-    {
-        return new PrivateChannel('orders.'.$this->order->id);
-    }
+/**
+ * Get the channel the event should broadcast on.
+ */
+public function broadcastOn(): Channel
+{
+    return new PrivateChannel('orders.'.$this->order->id);
+}
+```
 
-If you wish the event to broadcast on multiple channels, you may return an `array` instead:
+```php tab=Multiple channels filename=app/Events/OrderShipmentStatusUpdated.php
+use Illuminate\Broadcasting\PrivateChannel;
 
-    use Illuminate\Broadcasting\PrivateChannel;
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
-    public function broadcastOn(): array
-    {
-        return [
-            new PrivateChannel('orders.'.$this->order->id),
-            // ...
-        ];
-    }
+/**
+ * Get the channels the event should broadcast on.
+ *
+ * @return array<int, \Illuminate\Broadcasting\Channel>
+ */
+public function broadcastOn(): array
+{
+    return [
+        new PrivateChannel('orders.'.$this->order->id),
+        // ...
+    ];
+}
+```
 
 <a name="example-application-authorizing-channels"></a>
 #### Authorizing Channels

@@ -331,58 +331,60 @@ If your exception contains custom reporting logic that is only necessary when ce
 
 If your application reports a very large number of exceptions, you may want to throttle how many exceptions are actually logged or sent to your application's external error tracking service.
 
-To take a random sample rate of exceptions, you may use the `throttle` exception method in your application's `bootstrap/app.php` file. The `throttle` method receives a closure that should return a `Lottery` instance:
+To take a random sample rate of exceptions, you may use the `throttle` exception method in your application's `bootstrap/app.php` file. The `throttle` method receives a closure that should return a `Lottery` instance. It is also possible to conditionally sample based on the exception type. If you would like to only sample instances of a specific exception class, you may return a `Lottery` instance only for that class. You may also rate limit exceptions logged or sent to an external error tracking service by returning a `Limit` instance instead of a `Lottery`. This is useful if you want to protect against sudden bursts of exceptions flooding your logs, for example, when a third-party service used by your application is down. By default, limits will use the exception's class as the rate limit key. You can customize this by specifying your own key using the `by` method on the `Limit`:
 
-    use Illuminate\Support\Lottery;
-    use Throwable;
+```php tab=Throttle with Lottery filename=bootstrap/app.php
+use Illuminate\Support\Lottery;
+use Throwable;
 
-    ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->throttle(function (Throwable $e) {
+->withExceptions(function (Exceptions $exceptions) {
+    $exceptions->throttle(function (Throwable $e) {
+        return Lottery::odds(1, 1000);
+    });
+})
+```
+
+```php tab=Conditionally sample based on execption type filename=bootstrap/app.php
+use App\Exceptions\ApiMonitoringException;
+use Illuminate\Support\Lottery;
+use Throwable;
+
+->withExceptions(function (Exceptions $exceptions) {
+    $exceptions->throttle(function (Throwable $e) {
+        if ($e instanceof ApiMonitoringException) {
             return Lottery::odds(1, 1000);
-        });
-    })
+        }
+    });
+})
+```
 
-It is also possible to conditionally sample based on the exception type. If you would like to only sample instances of a specific exception class, you may return a `Lottery` instance only for that class:
+```php tab=Throttle with limit filename=bootstrap/app.php
+use Illuminate\Broadcasting\BroadcastException;
+use Illuminate\Cache\RateLimiting\Limit;
+use Throwable;
 
-    use App\Exceptions\ApiMonitoringException;
-    use Illuminate\Support\Lottery;
-    use Throwable;
+->withExceptions(function (Exceptions $exceptions) {
+    $exceptions->throttle(function (Throwable $e) {
+        if ($e instanceof BroadcastException) {
+            return Limit::perMinute(300);
+        }
+    });
+})
+```
 
-    ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->throttle(function (Throwable $e) {
-            if ($e instanceof ApiMonitoringException) {
-                return Lottery::odds(1, 1000);
-            }
-        });
-    })
+```php tab=Customizing the rate limit key filename=bootstrap/app.php
+use Illuminate\Broadcasting\BroadcastException;
+use Illuminate\Cache\RateLimiting\Limit;
+use Throwable;
 
-You may also rate limit exceptions logged or sent to an external error tracking service by returning a `Limit` instance instead of a `Lottery`. This is useful if you want to protect against sudden bursts of exceptions flooding your logs, for example, when a third-party service used by your application is down:
-
-    use Illuminate\Broadcasting\BroadcastException;
-    use Illuminate\Cache\RateLimiting\Limit;
-    use Throwable;
-
-    ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->throttle(function (Throwable $e) {
-            if ($e instanceof BroadcastException) {
-                return Limit::perMinute(300);
-            }
-        });
-    })
-
-By default, limits will use the exception's class as the rate limit key. You can customize this by specifying your own key using the `by` method on the `Limit`:
-
-    use Illuminate\Broadcasting\BroadcastException;
-    use Illuminate\Cache\RateLimiting\Limit;
-    use Throwable;
-
-    ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->throttle(function (Throwable $e) {
-            if ($e instanceof BroadcastException) {
-                return Limit::perMinute(300)->by($e->getMessage());
-            }
-        });
-    })
+->withExceptions(function (Exceptions $exceptions) {
+    $exceptions->throttle(function (Throwable $e) {
+        if ($e instanceof BroadcastException) {
+            return Limit::perMinute(300)->by($e->getMessage());
+        }
+    });
+})
+```
 
 Of course, you may return a mixture of `Lottery` and `Limit` instances for different exceptions:
 
