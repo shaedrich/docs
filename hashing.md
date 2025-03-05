@@ -117,6 +117,6 @@ To prevent hash algorithm manipulation, Laravel's `Hash::check` method will firs
 
 This is the expected behavior for most applications, where the hashing algorithm is not expected to change and different algorithms can be an indication of a malicious attack. However, if you need to support multiple hashing algorithms within your application, such as when migrating from one algorithm to another, you can disable hash algorithm verification by setting the `HASH_VERIFY` environment variable to `false`:
 
-```ini
+```ini filename=.env
 HASH_VERIFY=false
 ```

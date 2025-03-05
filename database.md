@@ -41,14 +41,14 @@ By default, Laravel's sample [environment configuration](/docs/{{version}}/confi
 
 SQLite databases are contained within a single file on your filesystem. You can create a new SQLite database using the `touch` command in your terminal: `touch database/database.sqlite`. After the database has been created, you may easily configure your environment variables to point to this database by placing the absolute path to the database in the `DB_DATABASE` environment variable:
 
-```ini
+```ini filename=.env
 DB_CONNECTION=sqlite
 DB_DATABASE=/absolute/path/to/database.sqlite
 ```
 
 By default, foreign key constraints are enabled for SQLite connections. If you would like to disable them, you should set the `DB_FOREIGN_KEYS` environment variable to `false`:
 
-```ini
+```ini filename=.env
 DB_FOREIGN_KEYS=false
 ```
 

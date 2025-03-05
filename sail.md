@@ -266,7 +266,7 @@ From your local machine, you may access Meilisearch's web based administration p
 
 If you chose to install the [Typesense](https://typesense.org) service when installing Sail, your application's `docker-compose.yml` file will contain an entry for this lightning fast, open-source search engine that is natively integrated with [Laravel Scout](/docs/{{version}}/scout#typesense). Once you have started your containers, you may connect to the Typesense instance within your application by setting the following environment variables:
 
-```ini
+```ini filename=.env
 TYPESENSE_HOST=typesense
 TYPESENSE_PORT=8108
 TYPESENSE_PROTOCOL=http
@@ -282,7 +282,7 @@ If you plan to use Amazon S3 to store files while running your application in it
 
 By default, your application's `filesystems` configuration file already contains a disk configuration for the `s3` disk. In addition to using this disk to interact with Amazon S3, you may use it to interact with any S3 compatible file storage service such as MinIO by simply modifying the associated environment variables that control its configuration. For example, when using MinIO, your filesystem environment variable configuration should be defined as follows:
 
-```ini
+```ini filename=.env
 FILESYSTEM_DISK=s3
 AWS_ACCESS_KEY_ID=sail
 AWS_SECRET_ACCESS_KEY=password
@@ -294,7 +294,7 @@ AWS_USE_PATH_STYLE_ENDPOINT=true
 
 In order for Laravel's Flysystem integration to generate proper URLs when using MinIO, you should define the `AWS_URL` environment variable so that it matches your application's local URL and includes the bucket name in the URL path:
 
-```ini
+```ini filename=.env
 AWS_URL=http://localhost:9000/local
 ```
 
@@ -378,7 +378,7 @@ selenium:
 
 Laravel Sail's default `docker-compose.yml` file contains a service entry for [Mailpit](https://github.com/axllent/mailpit). Mailpit intercepts emails sent by your application during local development and provides a convenient web interface so that you can preview your email messages in your browser. When using Sail, Mailpit's default host is `mailpit` and is available via port 1025:
 
-```ini
+```ini filename=.env
 MAIL_HOST=mailpit
 MAIL_PORT=1025
 MAIL_ENCRYPTION=null

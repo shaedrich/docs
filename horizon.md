@@ -284,7 +284,7 @@ sudo apt-get install supervisor
 
 Supervisor configuration files are typically stored within your server's `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `horizon.conf` file that starts and monitors a `horizon` process:
 
-```ini
+```ini filename=.env
 [program:horizon]
 process_name=%(program_name)s
 command=php /home/forge/example.com/artisan horizon

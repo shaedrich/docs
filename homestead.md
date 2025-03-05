@@ -741,7 +741,7 @@ By default, Xdebug is already running and ready to accept connections. If you ne
 
 When debugging functional tests that make requests to the web server, it is easier to autostart debugging rather than modifying tests to pass through a custom header or cookie to trigger debugging. To force Xdebug to start automatically, modify the `/etc/php/7.x/fpm/conf.d/20-xdebug.ini` file inside your Homestead virtual machine and add the following configuration:
 
-```ini
+```ini filename=.env
 ; If Homestead.yaml contains a different subnet for the IP address, this address may be different...
 xdebug.client_host = 192.168.10.1
 xdebug.mode = debug

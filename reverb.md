@@ -43,7 +43,7 @@ Behind the scenes, the `install:broadcasting` Artisan command will run the `reve
 
 In order to establish a connection to Reverb, a set of Reverb "application" credentials must be exchanged between the client and server. These credentials are configured on the server and are used to verify the request from the client. You may define these credentials using the following environment variables:
 
-```ini
+```ini filename=.env
 REVERB_APP_ID=my-app-id
 REVERB_APP_KEY=my-app-key
 REVERB_APP_SECRET=my-app-secret
@@ -128,7 +128,7 @@ Alternatively, you may define `REVERB_SERVER_HOST` and `REVERB_SERVER_PORT` envi
 
 The `REVERB_SERVER_HOST` and `REVERB_SERVER_PORT` environment variables should not be confused with `REVERB_HOST` and `REVERB_PORT`. The former specify the host and port on which to run the Reverb server itself, while the latter pair instruct Laravel where to send broadcast messages. For example, in a production environment, you may route requests from your public Reverb hostname on port `443` to a Reverb server operating on `0.0.0.0:8080`. In this scenario, your environment variables would be defined as follows:
 
-```ini
+```ini filename=.env
 REVERB_SERVER_HOST=0.0.0.0
 REVERB_SERVER_PORT=8080
 
@@ -216,7 +216,7 @@ ulimit -n
 
 This command will display the open file limits allowed for different users. You may update these values by editing the `/etc/security/limits.conf` file. For example, updating the maximum number of open files to 10,000 for the `forge` user would look like the following:
 
-```ini
+```ini filename=.env
 # /etc/security/limits.conf
 forge        soft  nofile  10000
 forge        hard  nofile  10000
@@ -296,7 +296,7 @@ The output above shows the server can handle a maximum of 28,231 (60,999 - 32,76
 
 In most cases, you should use a process manager such as Supervisor to ensure the Reverb server is continually running. If you are using Supervisor to run Reverb, you should update the `minfds` setting of your server's `supervisor.conf` file to ensure Supervisor is able to open the files required to handle connections to your Reverb server:
 
-```ini
+```ini filename=.env
 [supervisord]
 ...
 minfds=10000

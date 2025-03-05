@@ -468,7 +468,7 @@ If your application interacts with small to medium sized databases or has a ligh
 
 To use the database engine, you may simply set the value of the `SCOUT_DRIVER` environment variable to `database`, or specify the `database` driver directly in your application's `scout` configuration file:
 
-```ini
+```ini filename=.env
 SCOUT_DRIVER=database
 ```
 
@@ -512,7 +512,7 @@ While you are free to use the Algolia, Meilisearch, or Typesense search engines 
 
 To use the collection engine, you may simply set the value of the `SCOUT_DRIVER` environment variable to `collection`, or specify the `collection` driver directly in your application's `scout` configuration file:
 
-```ini
+```ini filename=.env
 SCOUT_DRIVER=collection
 ```
 

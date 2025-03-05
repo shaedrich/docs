@@ -88,7 +88,7 @@ All variables in your `.env` files are typically parsed as strings, so some rese
 
 If you need to define an environment variable with a value that contains spaces, you may do so by enclosing the value in double quotes:
 
-```ini
+```ini filename=.env
 APP_NAME="My Application"
 ```
 
@@ -97,7 +97,7 @@ APP_NAME="My Application"
 
 All of the variables listed in the `.env` file will be loaded into the `$_ENV` PHP super-global when your application receives a request. However, you may use the `env` function to retrieve values from these variables in your configuration files. In fact, if you review the Laravel configuration files, you will notice many of the options are already using this function:
 
-```php
+```php filename=config/app.php
 'debug' => env('APP_DEBUG', false),
 ```
 

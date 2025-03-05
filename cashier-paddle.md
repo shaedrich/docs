@@ -166,7 +166,7 @@ Paddle relies on its own JavaScript library to initiate the Paddle checkout widg
 
 You can specify a locale to be used when formatting money values for display on invoices. Internally, Cashier utilizes [PHP's `NumberFormatter` class](https://www.php.net/manual/en/class.numberformatter.php) to set the currency locale:
 
-```ini
+```ini filename=.env
 CASHIER_CURRENCY_LOCALE=nl_BE
 ```
 

@@ -2011,7 +2011,7 @@ sudo apt-get install supervisor
 
 Supervisor configuration files are typically stored in the `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `laravel-worker.conf` file that starts and monitors `queue:work` processes:
 
-```ini
+```ini filename=.env
 [program:laravel-worker]
 process_name=%(program_name)s_%(process_num)02d
 command=php /home/forge/app.com/artisan queue:work sqs --sleep=3 --tries=3 --max-time=3600
@@ -2250,7 +2250,7 @@ composer require aws/aws-sdk-php
 
 Next, set the `queue.failed.driver` configuration option's value to `dynamodb`. In addition, you should define `key`, `secret`, and `region` configuration options within the failed job configuration array. These options will be used to authenticate with AWS. When using the `dynamodb` driver, the `queue.failed.database` configuration option is unnecessary:
 
-```php
+```php filename=config/queue.php
 'failed' => [
     'driver' => env('QUEUE_FAILED_DRIVER', 'dynamodb'),
     'key' => env('AWS_ACCESS_KEY_ID'),
@@ -2265,7 +2265,7 @@ Next, set the `queue.failed.driver` configuration option's value to `dynamodb`. 
 
 You may instruct Laravel to discard failed jobs without storing them by setting the `queue.failed.driver` configuration option's value to `null`. Typically, this may be accomplished via the `QUEUE_FAILED_DRIVER` environment variable:
 
-```ini
+```ini filename=.env
 QUEUE_FAILED_DRIVER=null
 ```
 

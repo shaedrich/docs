@@ -137,7 +137,7 @@ php artisan vendor:publish --tag=passport-config
 
 After the configuration file has been published, you may load your application's encryption keys by defining them as environment variables:
 
-```ini
+```ini filename=.env
 PASSPORT_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
 <private key here>
 -----END RSA PRIVATE KEY-----"
