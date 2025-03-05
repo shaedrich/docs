@@ -880,9 +880,9 @@ In addition, you may copy this file to another language directory to translate t
 <a name="custom-messages-for-specific-attributes"></a>
 #### Custom Messages for Specific Attributes
 
-You may customize the error messages used for specified attribute and rule combinations within your application's validation language files. To do so, add your message customizations to the `custom` array of your application's `lang/xx/validation.php` language file:
+You may customize the error messages used for specified attribute and rule combinations within your application's validation language files. To do so, add your message customizations to the `custom` array of your application's `validation` language file:
 
-```php
+```php filename=lang/en/validation.php
 'custom' => [
     'email' => [
         'required' => 'We need to know your email address!',
@@ -894,9 +894,9 @@ You may customize the error messages used for specified attribute and rule combi
 <a name="specifying-attribute-in-language-files"></a>
 ### Specifying Attributes in Language Files
 
-Many of Laravel's built-in error messages include an `:attribute` placeholder that is replaced with the name of the field or attribute under validation. If you would like the `:attribute` portion of your validation message to be replaced with a custom value, you may specify the custom attribute name in the `attributes` array of your `lang/xx/validation.php` language file:
+Many of Laravel's built-in error messages include an `:attribute` placeholder that is replaced with the name of the field or attribute under validation. If you would like the `:attribute` portion of your validation message to be replaced with a custom value, you may specify the custom attribute name in the `attributes` array of your `validation` language file:
 
-```php
+```php filename=lang/en/validation.php
 'attributes' => [
     'email' => 'email address',
 ],
@@ -922,9 +922,9 @@ If this validation rule fails, it will produce the following error message:
 The credit card number field is required when payment type is cc.
 ```
 
-Instead of displaying `cc` as the payment type value, you may specify a more user-friendly value representation in your `lang/xx/validation.php` language file by defining a `values` array:
+Instead of displaying `cc` as the payment type value, you may specify a more user-friendly value representation in your `validation` language file by defining a `values` array:
 
-```php
+```php filename=lang/en/validation.php
 'values' => [
     'payment_type' => [
         'cc' => 'credit card'

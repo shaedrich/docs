@@ -59,15 +59,15 @@ To use the Mailgun driver, install Symfony's Mailgun Mailer transport via Compos
 composer require symfony/mailgun-mailer symfony/http-client
 ```
 
-Next, you will need to make two changes in your application's `config/mail.php` configuration file. First, set your default mailer to `mailgun`:
+Next, you will need to make two changes in your application's `mail` configuration file. First, set your default mailer to `mailgun`:
 
-```php
+```php filename=config/mail.php
 'default' => env('MAIL_MAILER', 'mailgun'),
 ```
 
 Second, add the following configuration array to your array of `mailers`:
 
-```php
+```php filename=config/mail.php
 'mailgun' => [
     'transport' => 'mailgun',
     // 'client' => [
@@ -76,9 +76,9 @@ Second, add the following configuration array to your array of `mailers`:
 ],
 ```
 
-After configuring your application's default mailer, add the following options to your `config/services.php` configuration file:
+After configuring your application's default mailer, add the following options to your `services` configuration file:
 
-```php
+```php filename=config/services.php
 'mailgun' => [
     'domain' => env('MAILGUN_DOMAIN'),
     'secret' => env('MAILGUN_SECRET'),
@@ -89,7 +89,7 @@ After configuring your application's default mailer, add the following options t
 
 If you are not using the United States [Mailgun region](https://documentation.mailgun.com/en/latest/api-intro.html#mailgun-regions), you may define your region's endpoint in the `services` configuration file:
 
-```php
+```php filename=config/services.php
 'mailgun' => [
     'domain' => env('MAILGUN_DOMAIN'),
     'secret' => env('MAILGUN_SECRET'),
@@ -107,9 +107,9 @@ To use the [Postmark](https://postmarkapp.com/) driver, install Symfony's Postma
 composer require symfony/postmark-mailer symfony/http-client
 ```
 
-Next, set the `default` option in your application's `config/mail.php` configuration file to `postmark`. After configuring your application's default mailer, ensure that your `config/services.php` configuration file contains the following options:
+Next, set the `default` option in your application's `config/mail.php` configuration file to `postmark`. After configuring your application's default mailer, ensure that your `services` configuration file contains the following options:
 
-```php
+```php filename=config/services.php
 'postmark' => [
     'token' => env('POSTMARK_TOKEN'),
 ],
@@ -117,7 +117,7 @@ Next, set the `default` option in your application's `config/mail.php` configura
 
 If you would like to specify the Postmark message stream that should be used by a given mailer, you may add the `message_stream_id` configuration option to the mailer's configuration array. This configuration array can be found in your application's `config/mail.php` configuration file:
 
-```php
+```php filename=config/services.php
 'postmark' => [
     'transport' => 'postmark',
     'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
@@ -138,9 +138,9 @@ To use the [Resend](https://resend.com/) driver, install Resend's PHP SDK via Co
 composer require resend/resend-php
 ```
 
-Next, set the `default` option in your application's `config/mail.php` configuration file to `resend`. After configuring your application's default mailer, ensure that your `config/services.php` configuration file contains the following options:
+Next, set the `default` option in your application's `config/mail.php` configuration file to `resend`. After configuring your application's default mailer, ensure that your `services` configuration file contains the following options:
 
-```php
+```php filename=config/services.php
 'resend' => [
     'key' => env('RESEND_KEY'),
 ],
@@ -155,9 +155,9 @@ To use the Amazon SES driver you must first install the Amazon AWS SDK for PHP. 
 composer require aws/aws-sdk-php
 ```
 
-Next, set the `default` option in your `config/mail.php` configuration file to `ses` and verify that your `config/services.php` configuration file contains the following options:
+Next, set the `default` option in your `config/mail.php` configuration file to `ses` and verify that your `services` configuration file contains the following options:
 
-```php
+```php filename=config/services.php
 'ses' => [
     'key' => env('AWS_ACCESS_KEY_ID'),
     'secret' => env('AWS_SECRET_ACCESS_KEY'),
@@ -227,9 +227,9 @@ MAIL_FROM_NAME="App Name"
 MAILERSEND_API_KEY=your-api-key
 ```
 
-Finally, add MailerSend to the `mailers` array in your application's `config/mail.php` configuration file:
+Finally, add MailerSend to the `mailers` array in your application's `mail` configuration file:
 
-```php
+```php filename=config/mail.php
 'mailersend' => [
     'transport' => 'mailersend',
 ],
@@ -244,7 +244,7 @@ Sometimes, an external service you have configured to send your application's ma
 
 To accomplish this, you should define a mailer within your application's `mail` configuration file that uses the `failover` transport. The configuration array for your application's `failover` mailer should contain an array of `mailers` that reference the order in which configured mailers should be chosen for delivery:
 
-```php
+```php filename=config/mail.php
 'mailers' => [
     'failover' => [
         'transport' => 'failover',
@@ -261,7 +261,7 @@ To accomplish this, you should define a mailer within your application's `mail` 
 
 Once your failover mailer has been defined, you should set this mailer as the default mailer used by your application by specifying its name as the value of the `default` configuration key within your application's `mail` configuration file:
 
-```php
+```php filename=config/mail.php
 'default' => env('MAIL_MAILER', 'failover'),
 ```
 
@@ -270,7 +270,7 @@ Once your failover mailer has been defined, you should set this mailer as the de
 
 The `roundrobin` transport allows you to distribute your mailing workload across multiple mailers. To get started, define a mailer within your application's `mail` configuration file that uses the `roundrobin` transport. The configuration array for your application's `roundrobin` mailer should contain an array of `mailers` that reference which configured mailers should be used for delivery:
 
-```php
+```php filename=config/mail.php
 'mailers' => [
     'roundrobin' => [
         'transport' => 'roundrobin',
@@ -286,7 +286,7 @@ The `roundrobin` transport allows you to distribute your mailing workload across
 
 Once your round robin mailer has been defined, you should set this mailer as the default mailer used by your application by specifying its name as the value of the `default` configuration key within your application's `mail` configuration file:
 
-```php
+```php filename=config/mail.php
 'default' => env('MAIL_MAILER', 'roundrobin'),
 ```
 
@@ -347,18 +347,18 @@ return new Envelope(
 <a name="using-a-global-from-address"></a>
 #### Using a Global `from` Address
 
-However, if your application uses the same "from" address for all of its emails, it can become cumbersome to add it to each mailable class you generate. Instead, you may specify a global "from" address in your `config/mail.php` configuration file. This address will be used if no other "from" address is specified within the mailable class:
+However, if your application uses the same "from" address for all of its emails, it can become cumbersome to add it to each mailable class you generate. Instead, you may specify a global "from" address in your `mail` configuration file. This address will be used if no other "from" address is specified within the mailable class:
 
-```php
+```php filename=config/mail.php
 'from' => [
     'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
     'name' => env('MAIL_FROM_NAME', 'Example'),
 ],
 ```
 
-In addition, you may define a global "reply_to" address within your `config/mail.php` configuration file:
+In addition, you may define a global "reply_to" address within your `mail` configuration file:
 
-```php
+```php filename=config/mail.php
 'reply_to' => ['address' => 'example@example.com', 'name' => 'App Name'],
 ```
 
@@ -1492,9 +1492,9 @@ public function boot(): void
 }
 ```
 
-Once your custom transport has been defined and registered, you may create a mailer definition within your application's `config/mail.php` configuration file that utilizes the new transport:
+Once your custom transport has been defined and registered, you may create a mailer definition within your application's `mail` configuration file that utilizes the new transport:
 
-```php
+```php filename=config/mail.php
 'mailchimp' => [
     'transport' => 'mailchimp',
     // ...
@@ -1512,7 +1512,7 @@ composer require symfony/brevo-mailer symfony/http-client
 
 Once the Brevo mailer package has been installed, you may add an entry for your Brevo API credentials to your application's `services` configuration file:
 
-```php
+```php filename=config/services.php
 'brevo' => [
     'key' => 'your-api-key',
 ],
@@ -1520,7 +1520,7 @@ Once the Brevo mailer package has been installed, you may add an entry for your 
 
 Next, you may use the `Mail` facade's `extend` method to register the transport with Laravel. Typically, this should be done within the `boot` method of a service provider:
 
-```php
+```php filename=app/Providers/MailServiceProvider.php
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mailer\Bridge\Brevo\Transport\BrevoTransportFactory;
 use Symfony\Component\Mailer\Transport\Dsn;
@@ -1542,9 +1542,9 @@ public function boot(): void
 }
 ```
 
-Once your transport has been registered, you may create a mailer definition within your application's config/mail.php configuration file that utilizes the new transport:
+Once your transport has been registered, you may create a mailer definition within your application's `mail` configuration file that utilizes the new transport:
 
-```php
+```php filename=config/mail.php
 'brevo' => [
     'transport' => 'brevo',
     // ...

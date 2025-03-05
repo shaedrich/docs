@@ -48,9 +48,9 @@ php artisan migrate
 <a name="memcached"></a>
 #### Memcached
 
-Using the Memcached driver requires the [Memcached PECL package](https://pecl.php.net/package/memcached) to be installed. You may list all of your Memcached servers in the `config/cache.php` configuration file. This file already contains a `memcached.servers` entry to get you started:
+Using the Memcached driver requires the [Memcached PECL package](https://pecl.php.net/package/memcached) to be installed. You may list all of your Memcached servers in the `cache` configuration file. This file already contains a `memcached.servers` entry to get you started:
 
-```php
+```php filename=config/cache.php
 'memcached' => [
     // ...
 
@@ -66,7 +66,7 @@ Using the Memcached driver requires the [Memcached PECL package](https://pecl.ph
 
 If needed, you may set the `host` option to a UNIX socket path. If you do this, the `port` option should be set to `0`:
 
-```php
+```php filename=config/cache.php
 'memcached' => [
     // ...
 
@@ -539,9 +539,9 @@ To execute code on every cache operation, you may listen for various [events](/d
 
 </div>
 
-To increase performance, you may disable cache events by setting the `events` configuration option to `false` for a given cache store in your application's `config/cache.php` configuration file:
+To increase performance, you may disable cache events by setting the `events` configuration option to `false` for a given cache store in your application's `cache` configuration file:
 
-```php
+```php filename=config/cache.php
 'database' => [
     'driver' => 'database',
     // ...

@@ -53,7 +53,7 @@ Blade is the simple, yet powerful templating engine that is included with Larave
 
 Blade views may be returned from routes or controllers using the global `view` helper. Of course, as mentioned in the documentation on [views](/docs/{{version}}/views), data may be passed to the Blade view using the `view` helper's second argument:
 
-```php
+```php filename=routes/web.php
 Route::get('/', function () {
     return view('greeting', ['name' => 'Finn']);
 });

@@ -277,7 +277,7 @@ You may optionally adjust the [sample rate](#sampling) and ignored key patterns.
 
 You may also configure key grouping so that similar keys are grouped as a single entry. For example, you may wish to remove unique IDs from keys caching the same type of information. Groups are configured using a regular expression to "find and replace" parts of the key. An example is included in the configuration file:
 
-```php
+```php filename=config/pulse.php
 Recorders\CacheInteractions::class => [
     // ...
     'groups' => [
@@ -775,9 +775,9 @@ The `find` method returns an object containing `name`, `extra`, and `avatar` key
 
 Package authors may wish to provide recorder classes to allow users to configure the capturing of data.
 
-Recorders are registered in the `recorders` section of the application's `config/pulse.php` configuration file:
+Recorders are registered in the `recorders` section of the application's Pulse configuration file:
 
-```php
+```php filename=config/pulse.php
 [
     // ...
     'recorders' => [

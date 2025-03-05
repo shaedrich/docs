@@ -58,7 +58,7 @@ You may also configure a "fallback language", which will be used when the defaul
 
 You may modify the default language for a single HTTP request at runtime using the `setLocale` method provided by the `App` facade:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Support\Facades\App;
 
 Route::get('/greeting/{locale}', function (string $locale) {
@@ -160,9 +160,9 @@ You should not define translation string keys that conflict with other translati
 <a name="retrieving-translation-strings"></a>
 ## Retrieving Translation Strings
 
-You may retrieve translation strings from your language files using the `__` helper function. If you are using "short keys" to define your translation strings, you should pass the file that contains the key and the key itself to the `__` function using "dot" syntax. For example, let's retrieve the `welcome` translation string from the `lang/en/messages.php` language file:
+You may retrieve translation strings from your language files using the `__` helper function. If you are using "short keys" to define your translation strings, you should pass the file that contains the key and the key itself to the `__` function using "dot" syntax. For example, let's retrieve the `welcome` translation string from the English `messages` language file:
 
-```php
+```php filename=lang/en/messages.php
 echo __('messages.welcome');
 ```
 

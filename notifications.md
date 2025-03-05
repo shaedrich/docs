@@ -1263,7 +1263,7 @@ If you only need to send notifications to the same Slack workspace that the App 
 
 Next, copy the App's "Bot User OAuth Token" and place it within a `slack` configuration array in your application's `services.php` configuration file. This token can be found on the "OAuth & Permissions" tab within Slack:
 
-```php
+```php filename=config/services.php
 'slack' => [
     'notifications' => [
         'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

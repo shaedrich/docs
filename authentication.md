@@ -207,7 +207,7 @@ use Illuminate\Http\Request;
 
 When attaching the `auth` middleware to a route, you may also specify which "guard" should be used to authenticate the user. The guard specified should correspond to one of the keys in the `guards` array of your `auth.php` configuration file:
 
-```php
+```php filename=config/auth.php
 Route::get('/flights', function () {
     // Only authenticated users may access this route...
 })->middleware('auth:admin');
@@ -618,7 +618,7 @@ class AppServiceProvider extends ServiceProvider
 
 As you can see in the example above, the callback passed to the `extend` method should return an implementation of `Illuminate\Contracts\Auth\Guard`. This interface contains a few methods you will need to implement to define a custom guard. Once your custom guard has been defined, you may reference the guard in the `guards` configuration of your `auth.php` configuration file:
 
-```php
+```php filename=config/auth.php
 'guards' => [
     'api' => [
         'driver' => 'jwt',
@@ -652,7 +652,7 @@ public function boot(): void
 
 Once your custom authentication driver has been defined, you may configure it as a driver within the `guards` configuration of your `auth.php` configuration file:
 
-```php
+```php filename=config/auth.php
 'guards' => [
     'api' => [
         'driver' => 'custom-token',
@@ -662,7 +662,7 @@ Once your custom authentication driver has been defined, you may configure it as
 
 Finally, you may reference the guard when assigning the authentication middleware to a route:
 
-```php
+```php filename=routes/api.php
 Route::middleware('auth:api')->group(function () {
     // ...
 });
@@ -703,7 +703,7 @@ class AppServiceProvider extends ServiceProvider
 
 After you have registered the provider using the `provider` method, you may switch to the new user provider in your `auth.php` configuration file. First, define a `provider` that uses your new driver:
 
-```php
+```php filename=config/auth.php
 'providers' => [
     'users' => [
         'driver' => 'mongo',
@@ -713,7 +713,7 @@ After you have registered the provider using the `provider` method, you may swit
 
 Finally, you may reference this provider in your `guards` configuration:
 
-```php
+```php filename=config/auth.php
 'guards' => [
     'web' => [
         'driver' => 'session',
@@ -786,7 +786,7 @@ This interface allows the authentication system to work with any "user" class, r
 <a name="automatic-password-rehashing"></a>
 ## Automatic Password Rehashing
 
-Laravel's default password hashing algorithm is bcrypt. The "work factor" for bcrypt hashes can be adjusted via your application's `config/hashing.php` configuration file or the `BCRYPT_ROUNDS` environment variable.
+Laravel's default password hashing algorithm is bcrypt. The "work factor" for bcrypt hashes can be adjusted via your application's `hashing` configuration file or the `BCRYPT_ROUNDS` environment variable.
 
 Typically, the bcrypt work factor should be increased over time as CPU / GPU processing power increases. If you increase the bcrypt work factor for your application, Laravel will gracefully and automatically rehash user passwords as users authenticate with your application via Laravel's starter kits or when you [manually authenticate users](#authenticating-users) via the `attempt` method.
 
@@ -798,7 +798,7 @@ php artisan config:publish hashing
 
 Once the configuration file has been published, you may set the `rehash_on_login` configuration value to `false`:
 
-```php
+```php filename=config/hashing.php
 'rehash_on_login' => false,
 ```
 

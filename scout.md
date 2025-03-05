@@ -73,9 +73,9 @@ class Post extends Model
 
 While not strictly required to use Scout, you should strongly consider configuring a [queue driver](/docs/{{version}}/queues) before using the library. Running a queue worker will allow Scout to queue all operations that sync your model information to your search indexes, providing much better response times for your application's web interface.
 
-Once you have configured a queue driver, set the value of the `queue` option in your `config/scout.php` configuration file to `true`:
+Once you have configured a queue driver, set the value of the `queue` option in your Scout configuration file to `true`:
 
-```php
+```php filename=config/scout.php
 'queue' => true,
 ```
 
@@ -83,7 +83,7 @@ Even when the `queue` option is set to `false`, it's important to remember that 
 
 To specify the connection and queue that your Scout jobs utilize, you may define the `queue` configuration option as an array:
 
-```php
+```php filename=config/scout.php
 'queue' => [
     'connection' => 'redis',
     'queue' => 'scout'
@@ -189,9 +189,9 @@ You should also define your Typesense collection schemas in your application's `
 
 If you need to change your Typesense collection's schema after it has been defined, you may either run `scout:flush` and `scout:import`, which will delete all existing indexed data and recreate the schema. Or, you may use Typesense's API to modify the collection's schema without removing any indexed data.
 
-If your searchable model is soft deletable, you should define a `__soft_deleted` field in the model's corresponding Typesense schema within your application's `config/scout.php` configuration file:
+If your searchable model is soft deletable, you should define a `__soft_deleted` field in the model's corresponding Typesense schema within your application's Scout configuration file:
 
-```php
+```php filename=config/scout.php
 User::class => [
     'collection-schema' => [
         'fields' => [
@@ -298,13 +298,13 @@ public function toSearchableArray()
 <a name="configuring-indexes-for-algolia"></a>
 #### Configuring Index Settings (Algolia)
 
-Sometimes you may want to configure additional settings on your Algolia indexes. While you can manage these settings via the Algolia UI, it is sometimes more efficient to manage the desired state of your index configuration directly from your application's `config/scout.php` configuration file.
+Sometimes you may want to configure additional settings on your Algolia indexes. While you can manage these settings via the Algolia UI, it is sometimes more efficient to manage the desired state of your index configuration directly from your application's Scout configuration file.
 
 This approach allows you to deploy these settings through your application's automated deployment pipeline, avoiding manual configuration and ensuring consistency across multiple environments. You may configure filterable attributes, ranking, faceting, or [any other supported settings](https://www.algolia.com/doc/rest-api/search/#tag/Indices/operation/setSettings).
 
-To get started, add settings for each index in your application's `config/scout.php` configuration file:
+To get started, add settings for each index in your application's Scout configuration file:
 
-```php
+```php filename=config/scout.php
 use App\Models\User;
 use App\Models\Flight;
 
@@ -840,9 +840,9 @@ Route::get('/orders', function (Request $request) {
 <a name="soft-deleting"></a>
 ### Soft Deleting
 
-If your indexed models are [soft deleting](/docs/{{version}}/eloquent#soft-deleting) and you need to search your soft deleted models, set the `soft_delete` option of the `config/scout.php` configuration file to `true`:
+If your indexed models are [soft deleting](/docs/{{version}}/eloquent#soft-deleting) and you need to search your soft deleted models, set the `soft_delete` option of the Scout configuration file to `true`:
 
-```php
+```php filename=config/scout.php
 'soft_delete' => true,
 ```
 
@@ -942,8 +942,8 @@ public function boot(): void
 }
 ```
 
-Once your engine has been registered, you may specify it as your default Scout `driver` in your application's `config/scout.php` configuration file:
+Once your engine has been registered, you may specify it as your default Scout `driver` in your application's Scout configuration file:
 
-```php
+```php filename=config/scout.php
 'driver' => 'mysql',
 ```

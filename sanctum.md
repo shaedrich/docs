@@ -314,9 +314,9 @@ axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;
 ```
 
-Finally, you should ensure your application's session cookie domain configuration supports any subdomain of your root domain. You may accomplish this by prefixing the domain with a leading `.` within your application's `config/session.php` configuration file:
+Finally, you should ensure your application's session cookie domain configuration supports any subdomain of your root domain. You may accomplish this by prefixing the domain with a leading `.` within your application's `session` configuration file:
 
-```php
+```php filename=config/session.php
 'domain' => '.domain.com',
 ```
 

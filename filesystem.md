@@ -99,7 +99,7 @@ composer require league/flysystem-aws-s3-v3 "^3.0" --with-all-dependencies
 
 An S3 disk configuration array is located in your `config/filesystems.php` configuration file. Typically, you should configure your S3 information and credentials using the following environment variables which are referenced by the `config/filesystems.php` configuration file:
 
-```ini
+```ini filename=.env
 AWS_ACCESS_KEY_ID=<your-key-id>
 AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
 AWS_DEFAULT_REGION=us-east-1
@@ -118,9 +118,9 @@ Before using the FTP driver, you will need to install the Flysystem FTP package 
 composer require league/flysystem-ftp "^3.0"
 ```
 
-Laravel's Flysystem integrations work great with FTP; however, a sample configuration is not included with the framework's default `config/filesystems.php` configuration file. If you need to configure an FTP filesystem, you may use the configuration example below:
+Laravel's Flysystem integrations work great with FTP; however, a sample configuration is not included with the framework's default `filesystems` configuration file. If you need to configure an FTP filesystem, you may use the configuration example below:
 
-```php
+```php filename=config/filesystems.php
 'ftp' => [
     'driver' => 'ftp',
     'host' => env('FTP_HOST'),
@@ -145,9 +145,9 @@ Before using the SFTP driver, you will need to install the Flysystem SFTP packag
 composer require league/flysystem-sftp-v3 "^3.0"
 ```
 
-Laravel's Flysystem integrations work great with SFTP; however, a sample configuration is not included with the framework's default `config/filesystems.php` configuration file. If you need to configure an SFTP filesystem, you may use the configuration example below:
+Laravel's Flysystem integrations work great with SFTP; however, a sample configuration is not included with the framework's default `filesystems` configuration file. If you need to configure an SFTP filesystem, you may use the configuration example below:
 
-```php
+```php filename=config/filesystems.php
 'sftp' => [
     'driver' => 'sftp',
     'host' => env('SFTP_HOST'),
@@ -355,9 +355,9 @@ $url = Storage::temporaryUrl(
 <a name="enabling-local-temporary-urls"></a>
 #### Enabling Local Temporary URLs
 
-If you started developing your application before support for temporary URLs was introduced to the `local` driver, you may need to enable local temporary URLs. To do so, add the `serve` option to your `local` disk's configuration array within the `config/filesystems.php` configuration file:
+If you started developing your application before support for temporary URLs was introduced to the `local` driver, you may need to enable local temporary URLs. To do so, add the `serve` option to your `local` disk's configuration array within the `filesystems` configuration file:
 
-```php
+```php filename=config/filesystems.php
 'local' => [
     'driver' => 'local',
     'root' => storage_path('app/private'),
@@ -387,7 +387,7 @@ $url = Storage::temporaryUrl(
 
 If you need to customize how temporary URLs are created for a specific storage disk, you can use the `buildTemporaryUrlsUsing` method. For example, this can be useful if you have a controller that allows you to download files stored via a disk that doesn't typically support temporary URLs. Usually, this method should be called from the `boot` method of a service provider:
 
-```php
+```php filename=app/Providers/AppServiceProviders.php
 <?php
 
 namespace App\Providers;

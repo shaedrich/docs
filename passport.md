@@ -89,9 +89,9 @@ class User extends Authenticatable
 }
 ```
 
-Finally, in your application's `config/auth.php` configuration file, you should define an `api` authentication guard and set the `driver` option to `passport`. This will instruct your application to use Passport's `TokenGuard` when authenticating incoming API requests:
+Finally, in your application's `auth` configuration file, you should define an `api` authentication guard and set the `driver` option to `passport`. This will instruct your application to use Passport's `TokenGuard` when authenticating incoming API requests:
 
-```php
+```php filename=config/auth.php
 'guards' => [
     'web' => [
         'driver' => 'session',
@@ -1004,9 +1004,9 @@ Route::get('/user', function () {
 <a name="multiple-authentication-guards"></a>
 #### Multiple Authentication Guards
 
-If your application authenticates different types of users that perhaps use entirely different Eloquent models, you will likely need to define a guard configuration for each user provider type in your application. This allows you to protect requests intended for specific user providers. For example, given the following guard configuration the `config/auth.php` configuration file:
+If your application authenticates different types of users that perhaps use entirely different Eloquent models, you will likely need to define a guard configuration for each user provider type in your application. This allows you to protect requests intended for specific user providers. For example, given the following guard configuration the `auth` configuration file:
 
-```php
+```php filename=config/auth.php
 'api' => [
     'driver' => 'passport',
     'provider' => 'users',

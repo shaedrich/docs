@@ -137,7 +137,7 @@ class User extends Authenticatable
 
 Cashier assumes your billable model will be the `App\Models\User` class that ships with Laravel. If you wish to change this you may specify a different model via the `useCustomerModel` method. This method should typically be called in the `boot` method of your `AppServiceProvider` class:
 
-```php
+```php filename=app/Providers/AppServiceProvider
 use App\Models\Cashier\User;
 use Laravel\Cashier\Cashier;
 
@@ -178,7 +178,7 @@ CASHIER_CURRENCY=eur
 
 In addition to configuring Cashier's currency, you may also specify a locale to be used when formatting money values for display on invoices. Internally, Cashier utilizes [PHP's `NumberFormatter` class](https://www.php.net/manual/en/class.numberformatter.php) to set the currency locale:
 
-```ini
+```ini filename=.env
 CASHIER_CURRENCY_LOCALE=nl_BE
 ```
 

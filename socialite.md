@@ -81,7 +81,7 @@ The `redirect` method provided by the `Socialite` facade takes care of redirecti
 
 Once the user has been retrieved from the OAuth provider, you may determine if the user exists in your application's database and [authenticate the user](/docs/{{version}}/authentication#authenticate-a-user-instance). If the user does not exist in your application's database, you will typically create a new record in your database to represent the user:
 
-```php
+```php filename=routes/web.php
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
@@ -182,7 +182,7 @@ After the user is redirected back to your application's authentication callback 
 
 Differing properties and methods may be available on this object depending on whether the OAuth provider you are authenticating with supports OAuth 1.0 or OAuth 2.0:
 
-```php
+```php filename=routes/web.php
 use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/auth/callback', function () {

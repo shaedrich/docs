@@ -633,7 +633,7 @@ Laravel provides a convenient way to [schedule cron jobs](/docs/{{version}}/sche
 
 If you would like the `schedule:run` command to be run for a Homestead site, you may set the `schedule` option to `true` when defining the site:
 
-```yaml
+```yaml filename=Homestead.yaml
 sites:
     - map: homestead.test
       to: /home/vagrant/project1/public

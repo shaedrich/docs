@@ -63,7 +63,7 @@ Each log channel is powered by a "driver". The driver determines how and where t
 
 By default, Monolog is instantiated with a "channel name" that matches the current environment, such as `production` or `local`. To change this value, you may add a `name` option to your channel's configuration:
 
-```php
+```php filename=config/logging.php
 'stack' => [
     'driver' => 'stack',
     'name' => 'channel-name',
@@ -114,9 +114,9 @@ By default, Slack will only receive logs at the `critical` level and above; howe
 <a name="logging-deprecation-warnings"></a>
 ### Logging Deprecation Warnings
 
-PHP, Laravel, and other libraries often notify their users that some of their features have been deprecated and will be removed in a future version. If you would like to log these deprecation warnings, you may specify your preferred `deprecations` log channel using the `LOG_DEPRECATIONS_CHANNEL` environment variable, or within your application's `config/logging.php` configuration file:
+PHP, Laravel, and other libraries often notify their users that some of their features have been deprecated and will be removed in a future version. If you would like to log these deprecation warnings, you may specify your preferred `deprecations` log channel using the `LOG_DEPRECATIONS_CHANNEL` environment variable, or within your application's `logging` configuration file:
 
-```php
+```php filename=config/logging.php
 'deprecations' => [
     'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
     'trace' => env('LOG_DEPRECATIONS_TRACE', false),
@@ -129,7 +129,7 @@ PHP, Laravel, and other libraries often notify their users that some of their fe
 
 Or, you may define a log channel named `deprecations`. If a log channel with this name exists, it will always be used to log deprecations:
 
-```php
+```php filename=config/logging.php
 'channels' => [
     'deprecations' => [
         'driver' => 'single',
@@ -485,9 +485,9 @@ If you would like to customize the processors for a `monolog` driver, add a `pro
 <a name="creating-custom-channels-via-factories"></a>
 ### Creating Custom Channels via Factories
 
-If you would like to define an entirely custom channel in which you have full control over Monolog's instantiation and configuration, you may specify a `custom` driver type in your `config/logging.php` configuration file. Your configuration should include a `via` option that contains the name of the factory class which will be invoked to create the Monolog instance:
+If you would like to define an entirely custom channel in which you have full control over Monolog's instantiation and configuration, you may specify a `custom` driver type in your `logging` configuration file. Your configuration should include a `via` option that contains the name of the factory class which will be invoked to create the Monolog instance:
 
-```php
+```php filename=config/logging.php
 'channels' => [
     'example-custom-channel' => [
         'driver' => 'custom',

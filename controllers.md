@@ -182,7 +182,7 @@ php artisan make:controller PhotoController --resource
 
 This command will generate a controller at `app/Http/Controllers/PhotoController.php`. The controller will contain a method for each of the available resource operations. Next, you may register a resource route that points to the controller:
 
-```php
+```php filename=routes/web.php
 use App\Http\Controllers\PhotoController;
 
 Route::resource('photos', PhotoController::class);
@@ -192,7 +192,7 @@ This single route declaration creates multiple routes to handle a variety of act
 
 You may even register many resource controllers at once by passing an array to the `resources` method:
 
-```php
+```php filename=routes/web.php
 Route::resources([
     'photos' => PhotoController::class,
     'posts' => PostController::class,

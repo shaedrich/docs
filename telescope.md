@@ -270,9 +270,9 @@ public function register(): void
 <a name="available-watchers"></a>
 ## Available Watchers
 
-Telescope "watchers" gather application data when a request or console command is executed. You may customize the list of watchers that you would like to enable within your `config/telescope.php` configuration file:
+Telescope "watchers" gather application data when a request or console command is executed. You may customize the list of watchers that you would like to enable within your Telescope configuration file:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\CacheWatcher::class => true,
     Watchers\CommandWatcher::class => true,
@@ -282,7 +282,7 @@ Telescope "watchers" gather application data when a request or console command i
 
 Some watchers also allow you to provide additional customization options:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\QueryWatcher::class => [
         'enabled' => env('TELESCOPE_QUERY_WATCHER', true),
@@ -305,9 +305,9 @@ The cache watcher records data when a cache key is hit, missed, updated and forg
 <a name="command-watcher"></a>
 ### Command Watcher
 
-The command watcher records the arguments, options, exit code, and output whenever an Artisan command is executed. If you would like to exclude certain commands from being recorded by the watcher, you may specify the command in the `ignore` option within your `config/telescope.php` file:
+The command watcher records the arguments, options, exit code, and output whenever an Artisan command is executed. If you would like to exclude certain commands from being recorded by the watcher, you may specify the command in the `ignore` option within your Telescope configuration file:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\CommandWatcher::class => [
         'enabled' => env('TELESCOPE_COMMAND_WATCHER', true),
@@ -335,9 +335,9 @@ The exception watcher records the data and stack trace for any reportable except
 <a name="gate-watcher"></a>
 ### Gate Watcher
 
-The gate watcher records the data and result of [gate and policy](/docs/{{version}}/authorization) checks by your application. If you would like to exclude certain abilities from being recorded by the watcher, you may specify those in the `ignore_abilities` option in your `config/telescope.php` file:
+The gate watcher records the data and result of [gate and policy](/docs/{{version}}/authorization) checks by your application. If you would like to exclude certain abilities from being recorded by the watcher, you may specify those in the `ignore_abilities` option in your Telescope configuration file:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\GateWatcher::class => [
         'enabled' => env('TELESCOPE_GATE_WATCHER', true),
@@ -362,9 +362,9 @@ The job watcher records the data and status of any [jobs](/docs/{{version}}/queu
 
 The log watcher records the [log data](/docs/{{version}}/logging) for any logs written by your application.
 
-By default, Telescope will only record logs at the `error` level and above. However, you can modify the `level` option in your application's `config/telescope.php` configuration file to modify this behavior:
+By default, Telescope will only record logs at the `error` level and above. However, you can modify the `level` option in your application's Telescope configuration file to modify this behavior:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\LogWatcher::class => [
         'enabled' => env('TELESCOPE_LOG_WATCHER', true),
@@ -385,7 +385,7 @@ The mail watcher allows you to view an in-browser preview of [emails](/docs/{{ve
 
 The model watcher records model changes whenever an Eloquent [model event](/docs/{{version}}/eloquent#events) is dispatched. You may specify which model events should be recorded via the watcher's `events` option:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\ModelWatcher::class => [
         'enabled' => env('TELESCOPE_MODEL_WATCHER', true),
@@ -397,7 +397,7 @@ The model watcher records model changes whenever an Eloquent [model event](/docs
 
 If you would like to record the number of models hydrated during a given request, enable the `hydrations` option:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\ModelWatcher::class => [
         'enabled' => env('TELESCOPE_MODEL_WATCHER', true),
@@ -418,7 +418,7 @@ The notification watcher records all [notifications](/docs/{{version}}/notificat
 
 The query watcher records the raw SQL, bindings, and execution time for all queries that are executed by your application. The watcher also tags any queries slower than 100 milliseconds as `slow`. You may customize the slow query threshold using the watcher's `slow` option:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\QueryWatcher::class => [
         'enabled' => env('TELESCOPE_QUERY_WATCHER', true),
@@ -438,7 +438,7 @@ The Redis watcher records all [Redis](/docs/{{version}}/redis) commands executed
 
 The request watcher records the request, headers, session, and response data associated with any requests handled by the application. You may limit your recorded response data via the `size_limit` (in kilobytes) option:
 
-```php
+```php filename=config/telescope.php
 'watchers' => [
     Watchers\RequestWatcher::class => [
         'enabled' => env('TELESCOPE_REQUEST_WATCHER', true),

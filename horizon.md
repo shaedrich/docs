@@ -58,7 +58,7 @@ After publishing Horizon's assets, its primary configuration file will be locate
 
 After installation, the primary Horizon configuration option that you should familiarize yourself with is the `environments` configuration option. This configuration option is an array of environments that your application runs on and defines the worker process options for each environment. By default, this entry contains a `production` and `local` environment. However, you are free to add more environments as needed:
 
-```php
+```php filename=config/horizon.php
 'environments' => [
     'production' => [
         'supervisor-1' => [
@@ -78,7 +78,7 @@ After installation, the primary Horizon configuration option that you should fam
 
 You may also define a wildcard environment (`*`) which will be used when no other matching environment is found:
 
-```php
+```php filename=config/horizon.php
 'environments' => [
     // ...
 
@@ -107,7 +107,7 @@ You may add additional supervisors to a given environment if you would like to d
 
 While your application is in [maintenance mode](/docs/{{version}}/configuration#maintenance-mode), queued jobs will not be processed by Horizon unless the supervisor's `force` option is defined as `true` within the Horizon configuration file:
 
-```php
+```php filename=config/horizon.php
 'environments' => [
     'production' => [
         'supervisor-1' => [
@@ -134,7 +134,7 @@ The `auto` strategy, which is the configuration file's default, adjusts the numb
 
 When using the `auto` strategy, you may define the `minProcesses` and `maxProcesses` configuration options to control the minimum number of processes per queue and the maximum number of worker processes in total Horizon should scale up and down to:
 
-```php
+```php filename=config/horizon.php
 'environments' => [
     'production' => [
         'supervisor-1' => [
@@ -428,9 +428,9 @@ public function boot(): void
 <a name="configuring-notification-wait-time-thresholds"></a>
 #### Configuring Notification Wait Time Thresholds
 
-You may configure how many seconds are considered a "long wait" within your application's `config/horizon.php` configuration file. The `waits` configuration option within this file allows you to control the long wait threshold for each connection / queue combination. Any undefined connection / queue combinations will default to a long wait threshold of 60 seconds:
+You may configure how many seconds are considered a "long wait" within your application's Horizon configuration file. The `waits` configuration option within this file allows you to control the long wait threshold for each connection / queue combination. Any undefined connection / queue combinations will default to a long wait threshold of 60 seconds:
 
-```php
+```php filename=config/horizon.php
 'waits' => [
     'redis:critical' => 30,
     'redis:default' => 60,

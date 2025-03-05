@@ -128,9 +128,9 @@ PUSHER_APP_CLUSTER="mt1"
 
 The `config/broadcasting.php` file's `pusher` configuration also allows you to specify additional `options` that are supported by Channels, such as the cluster.
 
-Then, set the `BROADCAST_CONNECTION` environment variable to `pusher` in your application's `.env` file:
+Then, set the `BROADCAST_CONNECTION` environment variable to `pusher`:
 
-```ini
+```ini filename=.env
 BROADCAST_CONNECTION=pusher
 ```
 
@@ -150,13 +150,13 @@ composer require ably/ably-php
 
 Next, you should configure your Ably credentials in the `config/broadcasting.php` configuration file. An example Ably configuration is already included in this file, allowing you to quickly specify your key. Typically, this value should be set via the `ABLY_KEY` [environment variable](/docs/{{version}}/configuration#environment-configuration):
 
-```ini
+```ini filename=.env
 ABLY_KEY=your-ably-key
 ```
 
-Then, set the `BROADCAST_CONNECTION` environment variable to `ably` in your application's `.env` file:
+Then, set the `BROADCAST_CONNECTION` environment variable to `ably`
 
-```ini
+```ini filename=.env
 BROADCAST_CONNECTION=ably
 ```
 
@@ -686,9 +686,9 @@ If your application is consuming many different channels, your `routes/channels.
 php artisan make:channel OrderChannel
 ```
 
-Next, register your channel in your `routes/channels.php` file:
+Next, register your channel like so:
 
-```php
+```php filename=routes/channels.php
 use App\Broadcasting\OrderChannel;
 
 Broadcast::channel('orders.{order}', OrderChannel::class);

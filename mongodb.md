@@ -72,9 +72,9 @@ composer require mongodb/laravel-mongodb
 <a name="configuration"></a>
 ## Configuration
 
-You may configure your MongoDB connection via your application's `config/database.php` configuration file. Within this file, add a `mongodb` connection that utilizes the `mongodb` driver:
+You may configure your MongoDB connection via your application's `database` configuration file. Within this file, add a `mongodb` connection that utilizes the `mongodb` driver:
 
-```php
+```php filename=config/database.php
 'connections' => [
     'mongodb' => [
         'driver' => 'mongodb',

@@ -26,9 +26,9 @@ composer require predis/predis:^2.0
 <a name="configuration"></a>
 ## Configuration
 
-You may configure your application's Redis settings via the `config/database.php` configuration file. Within this file, you will see a `redis` array containing the Redis servers utilized by your application:
+You may configure your application's Redis settings via the `database` configuration file. Within this file, you will see a `redis` array containing the Redis servers utilized by your application:
 
-```php
+```php filename=config/database.php
 'redis' => [
 
     'client' => env('REDIS_CLIENT', 'phpredis'),
@@ -61,7 +61,7 @@ You may configure your application's Redis settings via the `config/database.php
 
 Each Redis server defined in your configuration file is required to have a name, host, and a port unless you define a single URL to represent the Redis connection:
 
-```php
+```php filename=config/database.php
 'redis' => [
 
     'client' => env('REDIS_CLIENT', 'phpredis'),
@@ -87,7 +87,7 @@ Each Redis server defined in your configuration file is required to have a name,
 
 By default, Redis clients will use the `tcp` scheme when connecting to your Redis servers; however, you may use TLS / SSL encryption by specifying a `scheme` configuration option in your Redis server's configuration array:
 
-```php
+```php filename=config/database.php
 'default' => [
     'scheme' => 'tls',
     'url' => env('REDIS_URL'),
@@ -102,9 +102,9 @@ By default, Redis clients will use the `tcp` scheme when connecting to your Redi
 <a name="clusters"></a>
 ### Clusters
 
-If your application is utilizing a cluster of Redis servers, you should define these clusters within a `clusters` key of your Redis configuration. This configuration key does not exist by default so you will need to create it within your application's `config/database.php` configuration file:
+If your application is utilizing a cluster of Redis servers, you should define these clusters within a `clusters` key of your Redis configuration. This configuration key does not exist by default so you will need to create it within your application's `database` configuration file:
 
-```php
+```php filename=config/database.php
 'redis' => [
 
     'client' => env('REDIS_CLIENT', 'phpredis'),
@@ -135,9 +135,9 @@ By default, Laravel will use native Redis clustering since the `options.cluster`
 
 Laravel also supports client-side sharding when using Predis. However, client-side sharding does not handle failover; therefore, it is primarily suited for transient cached data that is available from another primary data store.
 
-If you would like to use client-side sharding instead of native Redis clustering, you may remove the `options.cluster` configuration value within your application's `config/database.php` configuration file:
+If you would like to use client-side sharding instead of native Redis clustering, you may remove the `options.cluster` configuration value within your application's `database` configuration file:
 
-```php
+```php filename=config/database.php
 'redis' => [
 
     'client' => env('REDIS_CLIENT', 'phpredis'),
@@ -155,7 +155,7 @@ If you would like to use client-side sharding instead of native Redis clustering
 
 If you would like your application to interact with Redis via the Predis package, you should ensure the `REDIS_CLIENT` environment variable's value is `predis`:
 
-```php
+```php filename=config/database.php
 'redis' => [
 
     'client' => env('REDIS_CLIENT', 'predis'),
@@ -164,9 +164,9 @@ If you would like your application to interact with Redis via the Predis package
 ],
 ```
 
-In addition to the default configuration options, Predis supports additional [connection parameters](https://github.com/nrk/predis/wiki/Connection-Parameters) that may be defined for each of your Redis servers. To utilize these additional configuration options, add them to your Redis server configuration in your application's `config/database.php` configuration file:
+In addition to the default configuration options, Predis supports additional [connection parameters](https://github.com/nrk/predis/wiki/Connection-Parameters) that may be defined for each of your Redis servers. To utilize these additional configuration options, add them to your Redis server configuration in your application's `database` configuration file:
 
-```php
+```php filename=config/database.php
 'default' => [
     'url' => env('REDIS_URL'),
     'host' => env('REDIS_HOST', '127.0.0.1'),
@@ -183,7 +183,7 @@ In addition to the default configuration options, Predis supports additional [co
 
 By default, Laravel will use the PhpRedis extension to communicate with Redis. The client that Laravel will use to communicate with Redis is dictated by the value of the `redis.client` configuration option, which typically reflects the value of the `REDIS_CLIENT` environment variable:
 
-```php
+```php filename=config/database.php
 'redis' => [
 
     'client' => env('REDIS_CLIENT', 'phpredis'),
@@ -192,9 +192,9 @@ By default, Laravel will use the PhpRedis extension to communicate with Redis. T
 ],
 ```
 
-In addition to the default configuration options, PhpRedis supports the following additional connection parameters: `name`, `persistent`, `persistent_id`, `prefix`, `read_timeout`, `retry_interval`, `max_retries`, `backoff_algorithm`, `backoff_base`, `backoff_cap`, `timeout`, and `context`. You may add any of these options to your Redis server configuration in the `config/database.php` configuration file:
+In addition to the default configuration options, PhpRedis supports the following additional connection parameters: `name`, `persistent`, `persistent_id`, `prefix`, `read_timeout`, `retry_interval`, `max_retries`, `backoff_algorithm`, `backoff_base`, `backoff_cap`, `timeout`, and `context`. You may add any of these options to your Redis server configuration in the `database` configuration file:
 
-```php
+```php filename=config/database.php
 'default' => [
     'url' => env('REDIS_URL'),
     'host' => env('REDIS_HOST', '127.0.0.1'),
@@ -215,7 +215,7 @@ In addition to the default configuration options, PhpRedis supports the followin
 
 The PhpRedis extension may also be configured to use a variety of serializers and compression algorithms. These algorithms can be configured via the `options` array of your Redis configuration:
 
-```php
+```php filename=config/database.php
 'redis' => [
 
     'client' => env('REDIS_CLIENT', 'phpredis'),

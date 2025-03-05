@@ -1075,9 +1075,9 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-Once the driver has been registered, you may use the `redis` driver in your application's `config/pennant.php` configuration file:
+Once the driver has been registered, you may use the `redis` driver in your application's Pennant configuration file:
 
-```php
+```php filename=config/pennant.php
 'stores' => [
 
     'redis' => [
