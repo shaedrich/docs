@@ -260,7 +260,7 @@ Offering product and subscription billing via your application can be intimidati
 
 To charge customers for non-recurring, single-charge products, we'll utilize Cashier to direct customers to Stripe Checkout, where they will provide their payment details and confirm their purchase. Once the payment has been made via Checkout, the customer will be redirected to a success URL of your choosing within your application:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/checkout', function (Request $request) {
@@ -313,7 +313,7 @@ As you can see in the example above, when a user begins the checkout process, we
 
 Next, let's build the Checkout success route. This is the route that users will be redirected to after their purchase has been completed via Stripe Checkout. Within this route, we can retrieve the Stripe Checkout session ID and the associated Stripe Checkout instance in order to access our provided meta data and update our customer's order accordingly:
 
-```php
+```php filename=routes/web.php
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
@@ -448,7 +448,7 @@ First, define a link or button within your application that directs users to a L
 
 Next, let's define the route that initiates a Stripe Customer Billing Portal session and redirects the user to the Portal. The `redirectToBillingPortal` method accepts the URL that users should be returned to when exiting the Portal:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/billing', function (Request $request) {
@@ -619,7 +619,7 @@ Similarly, you may override the `stripeEmail`, `stripePhone`, `stripeAddress`, a
 
 Stripe offers [an easy way to set up a billing portal](https://stripe.com/docs/billing/subscriptions/customer-portal) so that your customer can manage their subscription, payment methods, and view their billing history. You can redirect your users to the billing portal by invoking the `redirectToBillingPortal` method on the billable model from a controller or route:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/billing-portal', function (Request $request) {
@@ -629,7 +629,7 @@ Route::get('/billing-portal', function (Request $request) {
 
 By default, when the user is finished managing their subscription, they will be able to return to the `home` route of your application via a link within the Stripe billing portal. You may provide a custom URL that the user should return to by passing the URL as an argument to the `redirectToBillingPortal` method:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/billing-portal', function (Request $request) {
@@ -2282,7 +2282,7 @@ Route::get('/product-checkout', function (Request $request) {
 
 When defining your `success_url` checkout option, you may instruct Stripe to add the checkout session ID as a query string parameter when invoking your URL. To do so, add the literal string `{CHECKOUT_SESSION_ID}` to your `success_url` query string. Stripe will replace this placeholder with the actual checkout session ID:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Stripe\Customer;

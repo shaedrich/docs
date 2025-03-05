@@ -81,7 +81,7 @@ Every resource class defines a `toArray` method which returns the array of attri
 
 Note that we can access model properties directly from the `$this` variable. This is because a resource class will automatically proxy property and method access down to the underlying model for convenient access. Once the resource is defined, it may be returned from a route or controller. The resource accepts the underlying model instance via its constructor:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserResource;
 use App\Models\User;
 
@@ -95,7 +95,7 @@ Route::get('/user/{id}', function (string $id) {
 
 If you are returning a collection of resources or a paginated response, you should use the `collection` method provided by your resource class when creating the resource instance in your route or controller:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserResource;
 use App\Models\User;
 
@@ -141,7 +141,7 @@ class UserCollection extends ResourceCollection
 
 After defining your resource collection, it may be returned from a route or controller:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserCollection;
 use App\Models\User;
 
@@ -175,7 +175,7 @@ class UserResource extends JsonResource
 
 When the `preserveKeys` property is set to `true`, collection keys will be preserved when the collection is returned from a route or controller:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserResource;
 use App\Models\User;
 
@@ -247,7 +247,7 @@ class UserResource extends JsonResource
 
 Once a resource has been defined, it may be returned directly from a route or controller:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserResource;
 use App\Models\User;
 
@@ -291,7 +291,7 @@ public function toArray(Request $request): array
 
 While resources transform a single model into an array, resource collections transform a collection of models into an array. However, it is not absolutely necessary to define a resource collection class for each one of your models since all resources provide a `collection` method to generate an "ad-hoc" resource collection on the fly:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserResource;
 use App\Models\User;
 
@@ -331,7 +331,7 @@ class UserCollection extends ResourceCollection
 
 Like singular resources, resource collections may be returned directly from routes or controllers:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserCollection;
 use App\Models\User;
 
@@ -465,7 +465,7 @@ When returning paginated collections via a resource response, Laravel will wrap 
 
 You may pass a Laravel paginator instance to the `collection` method of a resource or to a custom resource collection:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserCollection;
 use App\Models\User;
 
@@ -811,7 +811,7 @@ return (new UserCollection(User::all()->load('roles')))
 
 As you have already read, resources may be returned directly from routes and controllers:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserResource;
 use App\Models\User;
 
@@ -822,7 +822,7 @@ Route::get('/user/{id}', function (string $id) {
 
 However, sometimes you may need to customize the outgoing HTTP response before it is sent to the client. There are two ways to accomplish this. First, you may chain the `response` method onto the resource. This method will return an `Illuminate\Http\JsonResponse` instance, giving you full control over the response's headers:
 
-```php
+```php filename=routes/api.php
 use App\Http\Resources\UserResource;
 use App\Models\User;
 

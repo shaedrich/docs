@@ -69,7 +69,7 @@ Want to take your Blade templates to the next level and build dynamic interfaces
 
 You may display data that is passed to your Blade views by wrapping the variable in curly braces. For example, given the following route:
 
-```php
+```php filename=routes/web.php
 Route::get('/', function () {
     return view('welcome', ['name' => 'Samantha']);
 });
@@ -1590,7 +1590,7 @@ Remember, content that is injected into a component will be supplied to the defa
 
 Now that we have defined our layout and task list views, we just need to return the `task` view from a route:
 
-```php
+```php filename=routes/web.php
 use App\Models\Task;
 
 Route::get('/tasks', function () {

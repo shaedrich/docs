@@ -595,7 +595,7 @@ Since the `$user` variable is type-hinted as the `App\Models\User` Eloquent mode
 
 Of course, implicit binding is also possible when using controller methods. Again, note the `{user}` URI segment matches the `$user` variable in the controller which contains an `App\Models\User` type-hint:
 
-```php
+```php filename=routes/web.php
 use App\Http\Controllers\UserController;
 use App\Models\User;
 

@@ -52,7 +52,7 @@ To properly implement support for allowing users to reset their passwords, we wi
 
 First, we will define the routes that are needed to request password reset links. To get started, we will define a route that returns a view with the password reset link request form:
 
-```php
+```php filename=routes/web.php
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->middleware('guest')->name('password.request');
@@ -65,7 +65,7 @@ The view that is returned by this route should have a form containing an `email`
 
 Next, we will define a route that handles the form submission request from the "forgot password" view. This route will be responsible for validating the email address and sending the password reset request to the corresponding user:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
@@ -102,7 +102,7 @@ You may be wondering how Laravel knows how to retrieve the user record from your
 
 Next, we will define the routes necessary to actually reset the password once the user clicks on the password reset link that has been emailed to them and provides a new password. First, let's define the route that will display the reset password form that is displayed when the user clicks the reset password link. This route will receive a `token` parameter that we will use later to verify the password reset request:
 
-```php
+```php filename=routes/web.php
 Route::get('/reset-password/{token}', function (string $token) {
     return view('auth.reset-password', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
@@ -115,7 +115,7 @@ The view that is returned by this route should display a form containing an `ema
 
 Of course, we need to define a route to actually handle the password reset form submission. This route will be responsible for validating the incoming request and updating the user's password in the database:
 
-```php
+```php filename=routes/web.php
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;

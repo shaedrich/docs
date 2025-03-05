@@ -535,7 +535,7 @@ After confirming their password, a user will not be asked to confirm their passw
 
 First, we will define a route to display a view that requests the user to confirm their password:
 
-```php
+```php filename=routes/web.php
 Route::get('/confirm-password', function () {
     return view('auth.confirm-password');
 })->middleware('auth')->name('password.confirm');
@@ -548,7 +548,7 @@ As you might expect, the view that is returned by this route should have a form 
 
 Next, we will define a route that will handle the form request from the "confirm password" view. This route will be responsible for validating the password and redirecting the user to their intended destination:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;

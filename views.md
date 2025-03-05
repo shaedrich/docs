@@ -31,7 +31,7 @@ Views separate your controller / application logic from your presentation logic 
 
 Since this view is stored at `resources/views/greeting.blade.php`, we may return it using the global `view` helper like so:
 
-```php
+```php filename=routes/web.php
 Route::get('/', function () {
     return view('greeting', ['name' => 'James']);
 });
@@ -60,7 +60,7 @@ The `.blade.php` extension informs the framework that the file contains a [Blade
 
 Once you have created a view, you may return it from one of your application's routes or controllers using the global `view` helper:
 
-```php
+```php filename=routes/web.php
 Route::get('/', function () {
     return view('greeting', ['name' => 'James']);
 });

@@ -35,7 +35,7 @@ To complement facades, Laravel offers a variety of global "helper functions" tha
 
 For example, instead of using the `Illuminate\Support\Facades\Response` facade to generate a JSON response, we may simply use the `response` function. Because helper functions are globally available, you do not need to import any classes in order to use them:
 
-```php
+```php filename=routes/api.php
 use Illuminate\Support\Facades\Response;
 
 Route::get('/users', function () {

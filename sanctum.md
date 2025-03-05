@@ -118,7 +118,7 @@ class User extends Authenticatable
 
 To issue a token, you may use the `createToken` method. The `createToken` method returns a `Laravel\Sanctum\NewAccessToken` instance. API tokens are hashed using SHA-256 hashing before being stored in your database, but you may access the plain-text value of the token using the `plainTextToken` property of the `NewAccessToken` instance. You should display this value to the user immediately after the token has been created:
 
-```php
+```php filename=routes/api.php
 use Illuminate\Http\Request;
 
 Route::post('/tokens/create', function (Request $request) {

@@ -216,7 +216,7 @@ Offering product and subscription billing via your application can be intimidati
 
 To charge customers for non-recurring, single-charge products, we'll utilize Cashier to charge customers with Paddle's Checkout Overlay, where they will provide their payment details and confirm their purchase. Once the payment has been made via the Checkout Overlay, the customer will be redirected to a success URL of your choosing within your application:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/buy', function (Request $request) {
@@ -246,7 +246,7 @@ When selling products, it's common to keep track of completed orders and purchas
 
 To accomplish this, you may provide an array of custom data to the `checkout` method. Let's imagine that a pending `Order` is created within our application when a user begins the checkout process. Remember, the `Cart` and `Order` models in this example are illustrative and not provided by Cashier. You are free to implement these concepts based on the needs of your own application:
 
-```php
+```php filename=routes/web.php
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -324,7 +324,7 @@ To learn how to sell subscriptions using Cashier and Paddle's Checkout Overlay, 
 
 First, let's discover how a customer can subscribe to our services. Of course, you can imagine the customer might click a "subscribe" button for the Basic plan on our application's pricing page. This button will invoke a Paddle Checkout Overlay for their chosen plan. To get started, let's initiate a checkout session via the `checkout` method:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/subscribe', function (Request $request) {
@@ -411,7 +411,7 @@ Route::get('/dashboard', function () {
 
 Of course, customers may want to change their subscription plan to another product or "tier". In our example from above, we'd want to allow the customer to change their plan from a monthly subscription to a yearly subscription. For this you'll need to implement something like a button that leads to the below route:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::put('/subscription/{price}/swap', function (Request $request, $price) {
@@ -423,7 +423,7 @@ Route::put('/subscription/{price}/swap', function (Request $request, $price) {
 
 Besides swapping plans you'll also need to allow your customers to cancel their subscription. Like swapping plans, provide a button that leads to the following route:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::put('/subscription/cancel', function (Request $request, $price) {
@@ -450,7 +450,7 @@ Before processing checkout payments using Paddle, you should define your applica
 
 Before displaying the Checkout Overlay widget, you must generate a checkout session using Cashier. A checkout session will inform the checkout widget of the billing operation that should be performed:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/buy', function (Request $request) {
@@ -487,7 +487,7 @@ The Paddle checkout widget is asynchronous. Once the user creates a subscription
 
 You may also manually render an overlay checkout without using Laravel's built-in Blade components. To get started, generate the checkout session [as demonstrated in previous examples](#overlay-checkout):
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/buy', function (Request $request) {
@@ -526,7 +526,7 @@ If you don't want to make use of Paddle's "overlay" style checkout widget, Paddl
 
 To make it easy for you to get started with inline checkout, Cashier includes a `paddle-checkout` Blade component. To get started, you should [generate a checkout session](#overlay-checkout):
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/buy', function (Request $request) {
@@ -556,7 +556,7 @@ Please consult Paddle's [guide on Inline Checkout](https://developer.paddle.com/
 
 You may also manually render an inline checkout without using Laravel's built-in Blade components. To get started, generate the checkout session [as demonstrated in previous examples](#inline-checkout):
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/buy', function (Request $request) {
@@ -588,7 +588,7 @@ $options['settings']['frameInitialHeight'] = 366;
 
 Sometimes, you may need to create a checkout session for users that do not need an account with your application. To do so, you may use the `guest` method:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 use Laravel\Paddle\Checkout;
 
@@ -744,7 +744,7 @@ $customer = $user->createAsCustomer($options);
 
 To create a subscription, first retrieve an instance of your billable model from your database, which will typically be an instance of `App\Models\User`. Once you have retrieved the model instance, you may use the `subscribe` method to create the model's checkout session:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/user/subscribe', function (Request $request) {
@@ -954,7 +954,7 @@ $response = $user->subscription()->chargeAndInvoice('pri_123');
 
 Paddle always saves a payment method per subscription. If you want to update the default payment method for a subscription, you should redirect your customer to Paddle's hosted payment method update page using the `redirectToUpdatePaymentMethod` method on the subscription model:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/update-payment-method', function (Request $request) {
@@ -1057,7 +1057,7 @@ $user->subscription()->incrementQuantity(1, 'price_chat');
 
 When creating subscription checkout sessions, you may specify multiple products for a given subscription by passing an array of prices as the first argument to the `subscribe` method:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::post('/user/subscribe', function (Request $request) {
@@ -1108,7 +1108,7 @@ Paddle allows your customers to have multiple subscriptions simultaneously. For 
 
 When your application creates subscriptions, you may provide the type of the subscription to the `subscribe` method as the second argument. The type may be any string that represents the type of subscription the user is initiating:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::post('/swimming/subscribe', function (Request $request) {
@@ -1218,7 +1218,7 @@ $user->subscription()->stopCancelation();
 
 If you would like to offer trial periods to your customers while still collecting payment method information up front, you should use set a trial time in the Paddle dashboard on the price your customer is subscribing to. Then, initiate the checkout session as normal:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/user/subscribe', function (Request $request) {
@@ -1290,7 +1290,7 @@ if ($user->onTrial()) {
 
 Once you are ready to create an actual subscription for the user, you may use the `subscribe` method as usual:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/user/subscribe', function (Request $request) {
@@ -1437,7 +1437,7 @@ To enable webhook verification, ensure that the `PADDLE_WEBHOOK_SECRET` environm
 
 If you would like to initiate a product purchase for a customer, you may use the `checkout` method on a billable model instance to generate a checkout session for the purchase. The `checkout` method accepts one or multiple price ID's. If necessary, an associative array may be used to provide the quantity of the product that is being purchased:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::get('/buy', function (Request $request) {
@@ -1544,7 +1544,7 @@ When listing the transactions for a customer, you may use the transaction instan
 
 The `download-invoice` route may look like the following:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 use Laravel\Paddle\Transaction;
 

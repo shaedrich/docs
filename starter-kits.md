@@ -334,7 +334,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 After registration, users will receive a verification email. To restrict access to certain routes until the user's email address is verified, add the `verified` middleware to the routes:
 
-```php
+```php filename=routes/web.php
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');

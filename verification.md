@@ -70,7 +70,7 @@ Third, a route will be needed to resend a verification link if the user accident
 
 As mentioned previously, a route should be defined that will return a view instructing the user to click the email verification link that was emailed to them by Laravel after registration. This view will be displayed to users when they try to access other parts of the application without verifying their email address first. Remember, the link is automatically emailed to the user as long as your `App\Models\User` model implements the `MustVerifyEmail` interface:
 
-```php
+```php filename=routes/web.php
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
@@ -86,7 +86,7 @@ The route that returns the email verification notice should be named `verificati
 
 Next, we need to define a route that will handle requests generated when the user clicks the email verification link that was emailed to them. This route should be named `verification.verify` and be assigned the `auth` and `signed` middlewares:
 
-```php
+```php filename=routes/web.php
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
@@ -105,7 +105,7 @@ Next, we can proceed directly to calling the `fulfill` method on the request. Th
 
 Sometimes a user may misplace or accidentally delete the email address verification email. To accommodate this, you may wish to define a route to allow the user to request that the verification email be resent. You may then make a request to this route by placing a simple form submission button within your [verification notice view](#the-email-verification-notice):
 
-```php
+```php filename=routes/web.php
 use Illuminate\Http\Request;
 
 Route::post('/email/verification-notification', function (Request $request) {

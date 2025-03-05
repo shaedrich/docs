@@ -533,13 +533,13 @@ Route::singleton(...)->destroyable();
 
 The `apiSingleton` method may be used to register a singleton resource that will be manipulated via an API, thus rendering the `create` and `edit` routes unnecessary:
 
-```php
+```php filename=routes/api.php
 Route::apiSingleton('profile', ProfileController::class);
 ```
 
 Of course, API singleton resources may also be `creatable`, which will register `store` and `destroy` routes for the resource:
 
-```php
+```php filename=routes/api.php
 Route::apiSingleton('photos.thumbnail', ProfileController::class)->creatable();
 ```
 

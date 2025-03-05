@@ -429,7 +429,7 @@ class Client extends BaseClient
 
 If the user approves the authorization request, they will be redirected back to the consuming application. The consumer should first verify the `state` parameter against the value that was stored prior to the redirect. If the state parameter matches then the consumer should issue a `POST` request to your application to request an access token. The request should include the authorization code that was issued by your application when the user approved the authorization request:
 
-```php
+```php filename=routes/api.php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -626,7 +626,7 @@ If the user approves the authorization request, they will be redirected back to 
 
 If the state parameter matches, the consumer should issue a `POST` request to your application to request an access token. The request should include the authorization code that was issued by your application when the user approved the authorization request along with the originally generated code verifier:
 
-```php
+```php filename=routes/api.php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 

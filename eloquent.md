@@ -665,7 +665,7 @@ $flight = Flight::where('legs', '>', 3)->firstOrFail();
 
 If the `ModelNotFoundException` is not caught, a 404 HTTP response is automatically sent back to the client:
 
-```php
+```php filename=routes/api.php
 use App\Models\Flight;
 
 Route::get('/api/flights/{id}', function (string $id) {

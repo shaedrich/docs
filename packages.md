@@ -239,7 +239,7 @@ public function boot(): void
 
 Package views are referenced using the `package::view` syntax convention. So, once your view path is registered in a service provider, you may load the `dashboard` view from the `courier` package like so:
 
-```php
+```php filename=routes/web.php
 Route::get('/dashboard', function () {
     return view('courier::dashboard');
 });
