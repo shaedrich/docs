@@ -34,6 +34,8 @@
     - [Broadcasting](/docs/{{version}}/broadcasting)
     - [Cache](/docs/{{version}}/cache)
     - [Collections](/docs/{{version}}/collections)
+    - [Concurrency](/docs/{{version}}/concurrency)
+    - [Context](/docs/{{version}}/context)
     - [Contracts](/docs/{{version}}/contracts)
     - [Events](/docs/{{version}}/events)
     - [File Storage](/docs/{{version}}/filesystem)
@@ -62,6 +64,7 @@
     - [Migrations](/docs/{{version}}/migrations)
     - [Seeding](/docs/{{version}}/seeding)
     - [Redis](/docs/{{version}}/redis)
+    - [MongoDB](/docs/{{version}}/mongodb)
 - ## Eloquent ORM
     - [Getting Started](/docs/{{version}}/eloquent)
     - [Relationships](/docs/{{version}}/eloquent-relationships)
@@ -78,7 +81,6 @@
     - [Database](/docs/{{version}}/database-testing)
     - [Mocking](/docs/{{version}}/mocking)
 - ## Packages
-    - [Breeze](/docs/{{version}}/starter-kits#laravel-breeze)
     - [Cashier (Stripe)](/docs/{{version}}/billing)
     - [Cashier (Paddle)](/docs/{{version}}/cashier-paddle)
     - [Dusk](/docs/{{version}}/dusk)
@@ -87,7 +89,6 @@
     - [Folio](/docs/{{version}}/folio)
     - [Homestead](/docs/{{version}}/homestead)
     - [Horizon](/docs/{{version}}/horizon)
-    - [Jetstream](https://jetstream.laravel.com)
     - [Mix](/docs/{{version}}/mix)
     - [Octane](/docs/{{version}}/octane)
     - [Passport](/docs/{{version}}/passport)
@@ -103,4 +104,4 @@
     - [Socialite](/docs/{{version}}/socialite)
     - [Telescope](/docs/{{version}}/telescope)
     - [Valet](/docs/{{version}}/valet)
-- [API Documentation](/api/master)
+- [API Documentation](https://api.laravel.com/docs/12.x)
